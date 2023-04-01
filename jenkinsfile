@@ -10,22 +10,22 @@ pipeline{
                 git branch: 'main', url: 'https://github.com/clemenrance/Practice.git'
             }
         }
-        stage('Integration Test'){
-
-            steps{
-                sh 'mvn verify DskipUnitTests'
-            }
-        }
         stage('Unit Test'){
 
             steps{
-                sh 'mvn test'
+                sh'mvn test'
+            }
+        }
+        stage('Integration Test'){
+
+            steps{
+                sh'mvn verify -DskipUnitTests'
             }
         }
         stage('Code Build'){
 
             steps{
-                sh 'mvn clean install'
+                sh'mvn clean install'
             }
         }
     }
