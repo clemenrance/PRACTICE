@@ -28,5 +28,25 @@ pipeline{
                 sh'mvn clean install'
             }
         }
+        stage('Static Test Analysis'){
+
+            steps{
+
+                script{
+                    withSonarQubeEnv(credentialsId: 'sonar-api'){
+                      sh 'mvn clean package sonar:sonar'
+                    }
+                }
+            }
+        }
+        stage('Quality Gtae Analysis'){
+
+            steps{
+
+                script{
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
+                }
+            }
+        }
     }
 }
