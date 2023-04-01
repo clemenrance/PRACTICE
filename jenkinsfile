@@ -57,5 +57,14 @@ pipeline{
                 }
             }
         }
+        stage('Building Docker image'){
+
+            steps{
+
+                script{
+                    sh 'docker build -t myuber .'
+                }
+            }
+        }
     }
 }
